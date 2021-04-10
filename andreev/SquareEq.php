@@ -15,15 +15,16 @@ Class SquareEq extends LineEq implements EquationInterface {
         }
         $discriminant = $this->discriminant($a, $b, $c);
         if($discriminant > 0) {
+            MyLog::log('This is square equation');
             $squareDiscriminant = sqrt($discriminant);
-            $this->x = array((-$b + $squareDiscriminant) / (2 * $a), (-$b - $squareDiscriminant) / (2 * $a));
+            return $this->x = array((-$b + $squareDiscriminant) / (2 * $a), (-$b - $squareDiscriminant) / (2 * $a));
         }
         if($discriminant == 0) {
-            $this->x = array(-$b / (2 * $a));
+            return $this->x = array(-$b / (2 * $a));
         }
         if($discriminant < 0) {
-           return null; 
+           throw new AndreevException('The equation has no solution');
         }
-        return $this->x;
+        throw new AndreevException('No roots');
     }
 }
