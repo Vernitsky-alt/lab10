@@ -1,37 +1,43 @@
 <?php
 
-class A
-{
+ini_set("display_errors", 1);
+error_reporting(-1);
 
-}
+Class A {
+    protected $x;
 
-class B extends A
-{
-    public function __construct($a, $b)
-    {
-        $this->a = $a;
-		$this->b = $b;
+    public function solveLine ($a,$b) {
+        if ($a == 0) {
+          return null;
+        }
+        return $this->x = array(-$b / $a);
     }
-    protected $b;
-    protected $a;
 }
-
-class C extends B
-{
-    public function __construct($a, $b, $c)
-    {
-        $this->c = $c;
-        parent::__construct($a, $b);
+Class B extends A {
+    protected function discriminant($a, $b, $c) {
+        $x = ($b**2)-4*$a*$c;
+        return $x;
     }
-    protected $c;
-
+    public function solveSquare($a, $b, $c) {
+        if($a == 0) {
+            return parent::solveLine($b, $c);
+        }
+        $discriminant = $this->discriminant($a, $b, $c);
+        if($discriminant > 0) {
+            $squareDiscriminant = sqrt($discriminant);
+            $this->x = array((-$b + $squareDiscriminant) / (2 * $a), (-$b - $squareDiscriminant) / (2 * $a));
+        }
+        if($discriminant == 0) {
+            $this->x = array(-$b / (2 * $a));
+        }
+        if($discriminant < 0) {
+           return null; 
+        }
+        return $this->x;
+    }
 }
-
-
-$a1 = new A();
-$a2 = new A();
-$a3 = new A();
-$a4 = new A();
-$b5 = new B($a3, $a4);
-$c6 = new C($a1, $a2, $b5);
-var_dump($c6);
+    
+$a = new A();
+$b = new B();
+var_dump($a->solveLine(10,5));
+var_dump($b->solveSquare(10,5,3));
