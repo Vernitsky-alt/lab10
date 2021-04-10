@@ -17,6 +17,15 @@ require_once('andreev\LineEq.php');
 require_once('andreev\SquareEq.php');
 
 try{
+    $dirLog = 'log\\';
+    if (!file_exists($dirLog)) {
+        mkdir($dirLog, 0755);
+    }
+
+    $fileOpen = fopen("version", "r");
+    MyLog::log("Version program: " . fgets($fileOpen));
+    fclose($fileOpen);
+
     echo "Enter 3 parameters: a, b, c \n\r";
 
     $a = (float)readline();
