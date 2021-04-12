@@ -1,44 +1,36 @@
-<?php
+﻿<?php
 
-use andreev\AndreevException;
 use andreev\MyLog;
-use andreev\SquareEq;
+use andreev\QuEquation;
+
+
+require_once __DIR__ . './vendor/autoload.php';
 
 ini_set("display_errors", 1);
 error_reporting(-1);
 
-require_once('core\EquationInterface.php');
-require_once('core\LogInterface.php');
-require_once('core\LogAbstract.php');
+try {
+    MyLog::log("Версия программы: " . trim(file_get_contents('version')) );
+    $b = new QuEquation();
+    $values = array();
 
-require_once('andreev\AndreevException.php');
-require_once('andreev\MyLog.php');
-require_once('andreev\LineEq.php');
-require_once('andreev\SquareEq.php');
-
-try{
-    $dirLog = 'log\\';
-    if (!file_exists($dirLog)) {
-        mkdir($dirLog, 0755);
+    for ($i = 1; $i < 4; $i++) {
+        echo "Введите " . $i . " аргумент: ";
+        $values[] = readline();
     }
+    $va = $values[0];
+    $vb = $values[1];
+    $vc = $values[2];
 
-    $fileOpen = fopen("version", "r");
-    MyLog::log("Version program: " . fgets($fileOpen));
-    fclose($fileOpen);
+    MyLog::log("Введено уравнение " . $va . "x^2 + " . $vb . "x + " . $vc . " = 0");
+    $x = $b->solve($va, $vb, $vc);
 
-    echo "Enter 3 parameters: a, b, c \n\r";
-
-    $a = (float)readline();
-    $b = (float)readline();
-    $c = (float)readline();
-
-    MyLog::log("The equation is introduced: " . "$a*x^2 + $b*x + $c = 0");
-
-    $squareEq = new SquareEq();
-    $result = $squareEq->solve($a, $b, $c);
-
-    MyLog::log('Equation roots: ' . implode('; ', $result));
-} catch (AndreevException $e) {
+    $str = implode(", ", $x);
+    MyLog::log("Корни уравнения: " . $str);
+} catch (Exception $e) {
     MyLog::log($e->getMessage());
 }
+
 MyLog::write();
+
+?>

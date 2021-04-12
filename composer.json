@@ -1,0 +1,39 @@
+{
+  "name": "vernitsky-alt/lab10"
+",
+  "description": "project",
+  "type": "project",
+  "license": "-",
+  "authors": [
+    {
+      "name": "andreev",
+	  "email": "andreev@gmail.com"
+    }
+  ],
+  
+
+  "minimum-stability": "dev",
+
+	"scripts": {
+    "post-install-cmd": [
+        "git symbolic-ref --short -q HEAD>version"
+    ]
+  },
+  
+  "require": {
+    "vernitsky-alt/lab10lf": "1.0"
+  },
+
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/rok9ru/trpo-core"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/Vernitsky-alt/lab10lf.git"
+    }
+  ]
+  
+}
+
