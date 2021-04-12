@@ -20,7 +20,7 @@
   },
   
   "require": {
-    "vernitsky-alt/lab10lf": "1.0"
+    "vernitsky-alt/lab10lf": "2.0"
   },
 
   "repositories": [
